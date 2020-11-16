@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <title>Sort Me</title>
+  </head>
+  <body>
+    <script src="js/index.js"></script>
+    <div id="container">
+      <div class="toolBar">
+        <div class="toolBarChild">
+          <label>Bars Number:</label>
+          <input id="size_slider" type="range" min="32" max="125" value="32" />
+          <label id="slider_value">32</label>
+        </div>
+        <div class="toolBarChild">
+          <label>Delay:</label>
+          <input id="delay_slider" type="range" min="1" max="500" value="1" />
+          <label id="delay_slider_value">1</label>
+        </div>
+        <div class="BarColor toolBarChild">
+          <label>pick the bars color</label>
+          <input id="BarColorPicker" type="color" value="#FFFF00" />
+        </div>
+        <div class="CompareColor toolBarChild">
+          <label>pick the compared bars color</label>
+          <input id="CompareColorPicker" type="color" value="#FF0000" />
+        </div>
+      </div>
+      <div id="btn_container">
+        <button id="bubble_sort" class="sort_btn">Bubble Sort</button>
+        <button id="insertion_sort" class="sort_btn">Insertion Sort</button>
+        <button id="selection_sort" class="sort_btn">Selection Sort</button>
+        <button id="merge_sort" class="sort_btn">Merge Sort</button>
+        <button id="quick_sort" class="sort_btn">Quick Sort</button>
+      </div>
+      <div id="block_container"></div>
+    </div>
+  </body>
+</html>
