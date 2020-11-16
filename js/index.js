@@ -1,33 +1,38 @@
 jQuery(function () {
   var n = 32,
-    blockwidth = 39;
+    blockwidth = Math.floor((getWindowWidth() - 32) / n - 8);
   var sorted = false;
   var swapDelay = 1;
   var data = [];
   var CompareColor = "#FF0000",
     BarsColor = "#FFFF00";
-  initBars();
-  function initBars(numberOfBars = 32, blockWidth = 39) {
+  initBars(n, blockwidth);
+  function initBars(numberOfBars, bWidth) {
     $("#block_container").empty();
+    var maxHeight = Math.floor((getWindowHeight() * 55) / 100);
     n = numberOfBars;
     sorted = false;
     for (i = 0; i < n; i++) {
-      var randValue = Math.floor(Math.random() * 400);
+      var randValue = Math.floor(Math.random() * maxHeight);
       while (randValue < 10) {
-        randValue = Math.floor(Math.random() * 400);
+        randValue = Math.floor(Math.random() * maxHeight);
       }
       data[i] = randValue;
       $("#block_container").append(
         "<div class='block' id='bar" + i + "'></div>"
       );
       $("#bar" + i).height(data[i] + "px");
-      $("#bar" + i).width(blockWidth + "px");
+      $("#bar" + i).width(bWidth + "px");
       $("#bar" + i).css("background", BarsColor);
     }
   }
 
   function getWindowWidth() {
     return $(window).width();
+  }
+
+  function getWindowHeight() {
+    return $(window).height();
   }
 
   function disableElement(btn) {
@@ -207,8 +212,10 @@ jQuery(function () {
           changeColor(minIndex, CompareColor);
           await delay(swapDelay);
         }
-        changeColor(j, BarsColor);
-        await delay(swapDelay);
+        if (j != minIndex) {
+          changeColor(j, BarsColor);
+          await delay(swapDelay);
+        }
       }
       swapValuesWithOutAnimation(i + 1, minIndex);
       changeColor(i + 1, BarsColor);
@@ -316,14 +323,17 @@ jQuery(function () {
     return indexOfSmallestElement;
   }
 
+  $(window).resize(function () {
+    blockwidth = Math.floor((getWindowWidth() - 32) / n - 8);
+    initBars(n, blockwidth);
+  });
+
   $("#size_slider").change(function () {
-    var size = $(this).val();
-    var width = Math.floor((getWindowWidth() - 32) / size - 8);
-    n = size;
-    blockwidth = width;
-    initBars(size, width);
+    n = $(this).val();
+    blockwidth = Math.floor((getWindowWidth() - 32) / n - 8);
+    initBars(n, blockwidth);
     $("#slider_value").empty();
-    $("#slider_value").append(size);
+    $("#slider_value").append(n);
   });
 
   $("#delay_slider").change(function () {

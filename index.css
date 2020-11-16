@@ -29,14 +29,12 @@
   width: 100%;
 }
 .toolBarChild {
-  position: relative;
-  float: left;
-}
-.toolBarChild {
   margin: 8px;
   border: turquoise;
   border-style: solid;
   border-radius: 8px;
+  position: relative;
+  float: left;
   padding: 8px;
 }
 label {
